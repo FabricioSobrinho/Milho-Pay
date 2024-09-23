@@ -1,7 +1,7 @@
 .input input {
-  height: 2.3rem;
-  width: 14rem;
-  margin: 0.2rem;
+  height: 2.6rem;
+  width: 15rem;
+  margin: 0.6rem;
 
   border: none;
   outline: none;
@@ -9,5 +9,5 @@
   box-shadow: black 0px 0px 15px -10px;
   padding: 0.5rem;
 
-  border-radius: 0.4rem;
+  border-radius: 0.2rem;
 }
