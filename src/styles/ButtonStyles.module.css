@@ -2,6 +2,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
   font-size: 1rem;
   font-weight: bold;
 }
@@ -9,7 +10,7 @@
 .button button {
   height: 3.2rem;
   width: 12rem;
-  margin: 0.5rem;
+  margin: 0.8rem;
 
   border-radius: 1.2rem;
   border: none;
@@ -18,11 +19,10 @@
   box-shadow: black 0px 0px 20px -10px;
   transition: 0.2s;
 }
-.default {
-  background-color: #f2f8ff;
-  color: #f2f8ff;
+.button button:hover {
+  background: #19b751;
 }
-.default:hover {
+.default {
   background-color: #f2f8ff;
   color: #f2f8ff;
 }
@@ -32,6 +32,19 @@
   color: #f2f8ff;
 }
 
-.green:hover {
-  background-color: #728a7b;
+.login {
+  background: #ffffff00;
+  color: #f2f8ff;
+  border: 1.5px solid #f2f8ff !important;
+}
+
+.small {
+  height: 1.8rem !important;
+  width: 13rem !important;
+
+  background: #ffffff00;
+  color: #f2f8ff;
+
+  font-size: 0.8rem;
+  border: 1.5px solid #f2f8ff !important;
 }
