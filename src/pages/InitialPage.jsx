@@ -17,7 +17,8 @@ function InitialPage() {
           <Input placeholder={"Nome da barraca"} />
           <Input placeholder={"Senha"} type={"password"} />
           <Input placeholder={"Confirme sua senha"} type={"password"} />
-          <Button text={"CRIAR CONTA"} color="green"/>
+
+          <Button text={"CRIAR CONTA"} type="green" />
         </div>
       </div>
     </div>
