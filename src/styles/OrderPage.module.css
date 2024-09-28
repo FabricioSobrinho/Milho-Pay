@@ -1,0 +1,75 @@
+.mainOrderPage {
+  display: flex;
+
+  height: 100vh;
+  width: 100vw;
+
+  background: #00a639;
+  color: #f0f8ff;
+}
+
+.leftOrderPage {
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+
+  width: 58vw;
+  background-color: #039a38;
+}
+
+.leftOrderPage h2 {
+    margin-top: 2rem;
+}
+.form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    flex-wrap: wrap;
+    padding: .7rem;
+}
+
+.orderResume {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    height: 100%;
+    width: 100%;
+
+    padding: 1rem;
+    background: #34533f;
+}
+
+.orderResume h2 {
+    margin-top: 1rem;
+}
+.rightOrderPage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 100vh;
+    width: 42vw;
+}
+.ticket {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    height: 90%;
+    width: 80%;
+
+    background: #f0f8ff;
+    color: black;
+    padding: 1rem;
+
+    gap: 1rem;
+}
+
+.ticket h4 {
+    margin-top: 1rem;
+    text-align: center;
+}
