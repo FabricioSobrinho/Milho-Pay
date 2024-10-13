@@ -21,6 +21,7 @@
 }
 .button button:hover {
   background: #19b751;
+  cursor: pointer;
 }
 .default {
   background-color: #f2f8ff;
