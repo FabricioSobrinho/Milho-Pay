@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useBaseUrl } from "../hooks/useBaseUrl";
+import Cookies from "js-cookie";
 
 import styles from "../styles/LoginPageStyles.module.css";
 
@@ -22,8 +23,10 @@ function LoginPage() {
   const makeLogin = async () => {
     try {
       const response = await axios.post(`${baseUrl}/login`, loginData, config);
-      // if (response)
-      console.log(response);
+      if (response.data.token) {
+        Cookies.set("loginToken", response.data.token, { expires: 7 });
+        console.log(Cookies.get("loginToken"));
+      }
     } catch (e) {
       console.log(e);
     }
