@@ -49,13 +49,13 @@ function DrinkCadPage() {
         />
         <Input
           placeholder={"Custo do Bebida"}
-          name={"value"}
+          name={"drinkCost"}
           type={"number"}
           handleChange={handleDrinkData}
         />
         <Input
           placeholder={"Valor de venda"}
-          name={"drinkCost"}
+          name={"value"}
           type={"number"}
           handleChange={handleDrinkData}
         />

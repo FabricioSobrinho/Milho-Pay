@@ -51,13 +51,13 @@ function MenuCadPage() {
         />
         <Input
           placeholder={"Custo do Prato"}
-          name={"value"}
+          name={"dishCost"}
           type={"number"}
           handleChange={handleMenuData}
         />
         <Input
           placeholder={"Valor de venda"}
-          name={"dishCost"}
+          name={"value"}
           type={"number"}
           handleChange={handleMenuData}
         />
