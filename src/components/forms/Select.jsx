@@ -1,10 +1,10 @@
 import styles from "../../styles/Select.module.css";
 
 // eslint-disable-next-line react/prop-types
-function Select({ text, options }) {
+function Select({ text, options, handleSelect, name }) {
   return (
     <div className={styles.select}>
-      <select defaultValue="">
+      <select defaultValue="" onChange={handleSelect} name={name}>
         <option value="" disabled>
           {text}
         </option>
@@ -12,7 +12,7 @@ function Select({ text, options }) {
         {options &&
           options.map((item) => (
             <option key={item.id} value={item.id}>
-              {item.nome}
+              {item.name}
             </option>
           ))}
       </select>
