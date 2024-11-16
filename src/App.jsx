@@ -6,6 +6,7 @@ import OrderPage from "./pages/OrderPage";
 import MenuCadPage from "./pages/MenuCadPage";
 import DrinkCadPage from "./pages/DrinkCadPage";
 import InitialPanel from "./pages/initialPanel";
+import TentMenu from "./pages/TentMenu";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/menu" element={<MenuCadPage />} />
           <Route path="/drink" element={<DrinkCadPage />} />
           <Route path="/tent" element={<InitialPanel />} />
+          <Route path="/tent/:tent" element={<TentMenu />} />
         </Routes>
       </Router>
     </>
