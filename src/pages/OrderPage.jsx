@@ -19,6 +19,8 @@ function OrderPage() {
 
   const [totalValue, setTotalValue] = useState(0);
 
+  const [ticket, setTicket] = useState({});
+
   const [menuDish, setMenuDish] = useState({ dishId: 0, quantity: 0 });
   const [menuDrink, setMenuDrink] = useState({ drinkId: 0, quantity: 0 });
 
@@ -64,7 +66,6 @@ function OrderPage() {
 
   const handlePaymentMethod = (e) => {
     setPaymentMethodId(e.target.value);
-    console.log(paymentMethodId);
   };
 
   const addDrink = () => {
@@ -96,6 +97,33 @@ function OrderPage() {
     }
   };
 
+  function genTicket(order) {
+    const mappedDishes = order.dishes.map((dishOrder) => {
+      const dish = dishs.find((d) => d.id === dishOrder.dishId);
+      return {
+        dishId: dishOrder.dishId,
+        name: dish ? dish.name : "Prato não encontrado",
+        quantity: dishOrder.quantity,
+        price: dish ? dish.value : 0,
+      };
+    });
+
+    const mappedDrinks = order.drinks.map((drinkOrder) => {
+      const drink = drinks.find((d) => d.id === drinkOrder.drinkId);
+      return {
+        drinkId: drinkOrder.drinkId,
+        name: drink ? drink.name : "Bebida não encontrada",
+        quantity: drinkOrder.quantity,
+        price: drink ? drink.value : 0,
+      };
+    });
+
+    return {
+      dishs: mappedDishes,
+      drinks: mappedDrinks,
+    };
+  }
+
   const makeSell = async () => {
     try {
       const sellData = {
@@ -110,7 +138,10 @@ function OrderPage() {
         sellData,
         authToken
       );
-      
+      const tick = genTicket(sellData);
+      console.log(tick);
+
+      setTicket((prev) => tick);
     } catch (e) {
       console.log(e);
     }
@@ -174,29 +205,25 @@ function OrderPage() {
         </div>
         <div className={styles.orderResume}>
           <h2>Resumo do pedido</h2>
-          <p>1 hamburguer</p>
-          <p>1 coca-cola</p>
+          {dishs
+            .filter((item) => sendDish.some((dish) => dish.dishId === item.id))
+            .map((filteredDish) => (
+              <div key={filteredDish.id}>{filteredDish.name}</div>
+            ))}
+          {drinks
+            .filter((item) =>
+              sendDrink.some((dish) => dish.drinkId === item.id)
+            )
+            .map((filteredDrink) => (
+              <div key={filteredDrink.id}>{filteredDrink.name}</div>
+            ))}
         </div>
       </div>
       <div className={styles.rightOrderPage}>
         <div className={styles.ticket}>
           <h4>Ticket</h4>
 
-          <OrderItem
-            item={{
-              nome: "Hamburguer",
-              valor: 10,
-              quantidade: 1,
-            }}
-          />
-
-          <OrderItem
-            item={{
-              nome: "Hamburguer",
-              valor: 10,
-              quantidade: 1,
-            }}
-          />
+          {ticket && <OrderItem order={ticket} />}
 
           <p>{totalValue}</p>
         </div>
