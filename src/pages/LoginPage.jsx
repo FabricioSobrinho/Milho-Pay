@@ -14,6 +14,8 @@ function LoginPage() {
     name: "",
     password: "",
   });
+
+  const navigate = useNavigate();
   const { baseUrl, config } = useBaseUrl();
 
   const handleLoginData = (e) => {
@@ -26,6 +28,7 @@ function LoginPage() {
       if (response.data.token) {
         Cookies.set("loginToken", response.data.token, { expires: 7 });
         console.log(Cookies.get("loginToken"));
+        navigate("/tent")
       }
     } catch (e) {
       console.log(e);
