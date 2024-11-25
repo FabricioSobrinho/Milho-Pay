@@ -87,6 +87,10 @@ function OrderPage() {
     setTotalValue((prev) => prev + value);
   };
 
+  const toFixed = (value) => {
+    return value + ".00"
+  }
+
   const loadDrinks = async () => {
     try {
       const response = await axios.get(`${baseUrl}/drinks`, authToken);
@@ -225,7 +229,7 @@ function OrderPage() {
 
           {ticket && <OrderItem order={ticket} />}
 
-          <p>{totalValue}</p>
+          <p>Valor total: {toFixed(totalValue)} R$</p>
         </div>
       </div>
     </div>
