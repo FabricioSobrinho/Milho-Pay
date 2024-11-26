@@ -22,6 +22,9 @@ function LoginPage() {
     setLoginData({ ...loginData, [e.target.name]: e.target.value });
   };
 
+  const navigateIndex = () => {
+    navigate("/")
+  }
   const makeLogin = async () => {
     try {
       const response = await axios.post(`${baseUrl}/login`, loginData, config);
@@ -58,7 +61,7 @@ function LoginPage() {
         <div className={styles.loginFooter}>
           <p>É novo por aqui? Cadastre sua barraca!</p>
 
-          <Button type="small" text={"NOVA BARRACA"} />
+          <Button type="small" text={"NOVA BARRACA"} handleClick={navigateIndex}/>
         </div>
       </div>
     </div>
