@@ -1,5 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Cookies from "js-cookie";
 
+import Navbar from "./components/Navbar";
 import InitialPage from "./pages/initialPage";
 import LoginPage from "./pages/LoginPage";
 import OrderPage from "./pages/OrderPage";
@@ -11,6 +13,7 @@ import TentMenu from "./pages/TentMenu";
 function App() {
   return (
     <>
+      <MainNavigation />
       <Router>
         <Routes>
           <Route exact path="/" element={<InitialPage />} />
@@ -24,6 +27,12 @@ function App() {
       </Router>
     </>
   );
+}
+
+function MainNavigation() {
+  const isLoggedIn = Cookies.get("isLogged");
+
+  return <div>{isLoggedIn ? <Navbar /> : <Navbar />}</div>;
 }
 
 export default App;
