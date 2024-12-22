@@ -50,7 +50,7 @@ function InitialPage() {
   return (
     <div className={styles.initialPage}>
       <div className={styles.leftInitialPage}>
-        <h1>Bem vindo de Voltaa!</h1>
+        <h1>Bem vindo de Volta!</h1>
         <p>Faça login para se conectar</p>
         <Button text={"LOGIN"} handleClick={loginNavigate} />
       </div>
