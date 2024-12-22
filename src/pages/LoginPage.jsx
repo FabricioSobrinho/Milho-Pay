@@ -30,6 +30,7 @@ function LoginPage() {
       const response = await axios.post(`${baseUrl}/login`, loginData, config);
       if (response.data.token) {
         Cookies.set("loginToken", response.data.token, { expires: 7 });
+        Cookies.set("isLogged", true, { expires: 7 });
         console.log(Cookies.get("loginToken"));
         navigate("/tent")
       }
