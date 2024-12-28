@@ -13,11 +13,9 @@ function TentMenu() {
     try {
       const response = await axios.get(`${baseUrl}/menu/${tent}`, config);
 
-      // Verifica se response.data é um array ou objeto
       if (Array.isArray(response.data)) {
         setItems(response.data);
       } else if (typeof response.data === "object" && response.data !== null) {
-        // Se for um objeto, mapeie os valores ou adapte conforme necessário
         const combinedItems = [
           ...(response.data.dishs || []),
           ...(response.data.drinks || []),
