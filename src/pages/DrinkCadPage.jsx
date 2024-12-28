@@ -3,6 +3,7 @@ import { useBaseUrl } from "../hooks/useBaseUrl";
 import axios from "axios";
 
 import styles from "../styles/DrinkCadPage.module.css";
+import drinkImage from "../assets/images/bebida.svg";
 
 import Input from "../components/forms/Input";
 import Button from "../components/forms/Button";
@@ -39,31 +40,36 @@ function DrinkCadPage() {
   };
 
   return (
-    <div className={styles.mainMenuCad}>
-      <h1>Cadastre suas bebidas!</h1>
-      <div className={styles.cadForm}>
-        <Input
-          placeholder={"Nome do Bebida"}
-          name={"name"}
-          handleChange={handleDrinkData}
-        />
-        <Input
-          placeholder={"Custo do Bebida"}
-          name={"drinkCost"}
-          type={"number"}
-          handleChange={handleDrinkData}
-        />
-        <Input
-          placeholder={"Valor de venda"}
-          name={"value"}
-          type={"number"}
-          handleChange={handleDrinkData}
-        />
-        <Button
-          text={"Incluir Bebida"}
-          type={"green"}
-          handleClick={insertDrink}
-        />
+    <div className={styles.mainDrinkCad}>
+      <div className={styles.leftDrinkCad}>
+        <img src={drinkImage} alt="copo de chopp" />
+      </div>
+      <div className={styles.rightDrinkCad}>
+        <h1>Cadastre suas bebidas!</h1>
+        <div className={styles.cadForm}>
+          <Input
+            placeholder={"Nome do Bebida"}
+            name={"name"}
+            handleChange={handleDrinkData}
+          />
+          <Input
+            placeholder={"Custo do Bebida"}
+            name={"drinkCost"}
+            type={"number"}
+            handleChange={handleDrinkData}
+          />
+          <Input
+            placeholder={"Valor de venda"}
+            name={"value"}
+            type={"number"}
+            handleChange={handleDrinkData}
+          />
+          <Button
+            text={"Incluir Bebida"}
+            type={"green"}
+            handleClick={insertDrink}
+          />
+        </div>
       </div>
     </div>
   );
