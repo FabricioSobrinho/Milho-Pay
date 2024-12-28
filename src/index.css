@@ -7,10 +7,12 @@
   font-family: "Open Sans", sans-serif;
 }
 body {
+  font-family: "Open Sans", sans-serif;
   background: #f2f8ff;
   background-image: url("./assets/images/background.jpg");
   background-repeat: no-repeat;
   background-position: center;
+  background-size: cover;
   height: 100vh;
   min-width: 100vw;
   width: 100%;
