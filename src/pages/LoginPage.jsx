@@ -10,12 +10,15 @@ import Button from "../components/forms/Button";
 import Input from "../components/forms/Input";
 
 import Loader from "../components/Loader";
+import Message from "../components/Message";
 
 function LoginPage() {
   const [loginData, setLoginData] = useState({
     name: "",
     password: "",
   });
+
+  const [error, setError] = useState(null);
 
   const navigate = useNavigate();
   const { baseUrl, config } = useBaseUrl();
@@ -32,7 +35,7 @@ function LoginPage() {
 
   const makeLogin = async () => {
     try {
-      setLoading(true)
+      setLoading(true);
       const response = await axios.post(`${baseUrl}/login`, loginData, config);
       if (response.data.token) {
         Cookies.set("loginToken", response.data.token, { expires: 7 });
@@ -42,6 +45,9 @@ function LoginPage() {
         navigate("/tent");
       } else {
         setLoading(false);
+        setError(
+          "Ocorreu um erro ao realizar login, verifique suas credenciais"
+        );
       }
     } catch (e) {
       console.log(e);
@@ -57,6 +63,7 @@ function LoginPage() {
         <div className={styles.loginPage}>
           <div className={styles.mainLoginPage}>
             <h1>Bem vindo de volta!</h1>
+            {error && <Message content={error} messageType={"error"} />}
             <div className={styles.loginForm}>
               <Input
                 placeholder={"Nome da Barraca"}
