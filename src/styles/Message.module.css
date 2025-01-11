@@ -1,0 +1,11 @@
+.Message {
+    display: fixed;
+    top: 15%;
+    padding: 1%;
+    text-align: center;
+    border-radius: 1rem;
+}
+
+.error {
+    background: #ca2929cb;
+}
