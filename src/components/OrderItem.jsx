@@ -8,7 +8,7 @@ function OrderItem({ order }) {
             <div key={index}>
               <p>Nome: {item.name}</p>
               <p>Quantidade: {item.quantity}</p>
-              <p>Preço: {item.price}</p>
+              <p>Preço unitário: {item.price}</p>
             </div>
           ))}
         </>
@@ -20,11 +20,13 @@ function OrderItem({ order }) {
             <div key={index}>
               <p>Nome: {item.name}</p>
               <p>Quantidade: {item.quantity}</p>
-              <p>Preço: {item.price}</p>
+              <p>Preço unitário: {item.price}</p>
             </div>
           ))}
         </>
       )}
+
+      
     </div>
   );
 }
