@@ -68,28 +68,9 @@ function OrderPage() {
     setPaymentMethodId(e.target.value);
   };
 
-  const addDrink = () => {
-    setSendDrink((prev) => [...prev, menuDrink]);
-
-    const drink = drinks.filter((item) => item.drinkId == menuDrink.id);
-
-    const value = drink[0].value * menuDrink.quantity;
-
-    setTotalValue((prev) => prev + value);
-  };
-
-  const addDish = () => {
-    setSendDish((prev) => [...prev, menuDish]);
-
-    const dish = dishs.filter((item) => item.dishId == menuDish.id);
-    const value = dish[0].value * menuDish.quantity;
-
-    setTotalValue((prev) => prev + value);
-  };
-
   const toFixed = (value) => {
-    return value + ".00"
-  }
+    return value + ".00";
+  };
 
   const loadDrinks = async () => {
     try {
@@ -100,6 +81,38 @@ function OrderPage() {
       console.log(e);
     }
   };
+  const addDish = () => {
+    setSendDish((prev) => {
+      const updated = [...prev, menuDish];
+      updateTotalValue(updated, sendDrink); // Atualiza imediatamente
+      return updated;
+    });
+  };
+
+  const addDrink = () => {
+    setSendDrink((prev) => {
+      const updated = [...prev, menuDrink];
+      updateTotalValue(sendDish, updated); // Atualiza imediatamente
+      return updated;
+    });
+  };
+
+  const updateTotalValue = (
+    newSendDish = sendDish,
+    newSendDrink = sendDrink
+  ) => {
+    const totalDishValue = newSendDish.reduce((acc, dishOrder) => {
+      const dish = dishs.find((d) => d.id === dishOrder.dishId);
+      return acc + (dish ? dish.value * dishOrder.quantity : 0);
+    }, 0);
+
+    const totalDrinkValue = newSendDrink.reduce((acc, drinkOrder) => {
+      const drink = drinks.find((d) => d.id === drinkOrder.drinkId);
+      return acc + (drink ? drink.value * drinkOrder.quantity : 0);
+    }, 0);
+
+    setTotalValue(totalDishValue + totalDrinkValue);
+  };
 
   function genTicket(order) {
     const mappedDishes = order.dishes.map((dishOrder) => {
@@ -109,6 +122,7 @@ function OrderPage() {
         name: dish ? dish.name : "Prato não encontrado",
         quantity: dishOrder.quantity,
         price: dish ? dish.value : 0,
+        total: dish ? dish.value * dishOrder.quantity : 0,
       };
     });
 
@@ -119,19 +133,35 @@ function OrderPage() {
         name: drink ? drink.name : "Bebida não encontrada",
         quantity: drinkOrder.quantity,
         price: drink ? drink.value : 0,
+        total: drink ? drink.value * drinkOrder.quantity : 0,
       };
     });
 
     return {
       dishs: mappedDishes,
       drinks: mappedDrinks,
+      totalValue:
+        mappedDishes.reduce((acc, d) => acc + d.total, 0) +
+        mappedDrinks.reduce((acc, d) => acc + d.total, 0),
     };
   }
 
   const makeSell = async () => {
     try {
+      const totalDishValue = sendDish.reduce((acc, dishOrder) => {
+        const dish = dishs.find((d) => d.id === dishOrder.dishId);
+        return acc + (dish ? dish.value * dishOrder.quantity : 0);
+      }, 0);
+
+      const totalDrinkValue = sendDrink.reduce((acc, drinkOrder) => {
+        const drink = drinks.find((d) => d.id === drinkOrder.drinkId);
+        return acc + (drink ? drink.value * drinkOrder.quantity : 0);
+      }, 0);
+
+      const calculatedTotalValue = totalDishValue + totalDrinkValue;
+
       const sellData = {
-        value: totalValue,
+        value: calculatedTotalValue,
         paymentMethodId: Number(paymentMethodId),
         dishes: sendDish,
         drinks: sendDrink,
@@ -142,10 +172,11 @@ function OrderPage() {
         sellData,
         authToken
       );
+
       const tick = genTicket(sellData);
       console.log(tick);
 
-      setTicket((prev) => tick);
+      setTicket(tick);
     } catch (e) {
       console.log(e);
     }
@@ -212,14 +243,36 @@ function OrderPage() {
           {dishs
             .filter((item) => sendDish.some((dish) => dish.dishId === item.id))
             .map((filteredDish) => (
-              <div key={filteredDish.id}>{filteredDish.name}</div>
+              <div
+                key={filteredDish.id}
+                onClick={() => {
+                  const updatedDishes = sendDish.filter(
+                    (dish) => dish.dishId !== filteredDish.id
+                  );
+                  setSendDish(updatedDishes);
+                  updateTotalValue(updatedDishes, sendDrink);
+                }}
+              >
+                {filteredDish.name}
+              </div>
             ))}
           {drinks
             .filter((item) =>
               sendDrink.some((dish) => dish.drinkId === item.id)
             )
             .map((filteredDrink) => (
-              <div key={filteredDrink.id}>{filteredDrink.name}</div>
+              <div
+                key={filteredDrink.id}
+                onClick={() => {
+                  const updatedDrinks = sendDrink.filter(
+                    (drink) => drink.drinkId !== filteredDrink.id
+                  );
+                  setSendDrink(updatedDrinks);
+                  updateTotalValue(sendDish, updatedDrinks);
+                }}
+              >
+                {filteredDrink.name}
+              </div>
             ))}
         </div>
       </div>
