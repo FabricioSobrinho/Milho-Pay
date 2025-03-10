@@ -8,7 +8,7 @@ import Cookies from "js-cookie";
 
 import Navbar from "./components/Navbar";
 import NavbarUnlogged from "./components/NavbarUnlogged";
-import InitialPage from "./pages/initialPage";
+import InitialPage from "./pages/InitialPage";
 import LoginPage from "./pages/LoginPage";
 import OrderPage from "./pages/OrderPage";
 import MenuCadPage from "./pages/MenuCadPage";
