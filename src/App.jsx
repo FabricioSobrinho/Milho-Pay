@@ -13,7 +13,7 @@ import LoginPage from "./pages/LoginPage";
 import OrderPage from "./pages/OrderPage";
 import MenuCadPage from "./pages/MenuCadPage";
 import DrinkCadPage from "./pages/DrinkCadPage";
-import InitialPanel from "./pages/initialPanel";
+import InitialPanel from "./pages/InitialPanel";
 import TentMenu from "./pages/TentMenu";
 
 function App() {
