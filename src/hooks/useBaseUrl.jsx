@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Cookies from "js-cookie";
 export const useBaseUrl = () => {
-  const [baseUrl, setBaseUrl] = useState(import.meta.env.REACT_APP_API_BASEURL)
+  const [baseUrl, setBaseUrl] = useState(import.meta.env.VITE_API_BASEURL)
 
   const token = Cookies.get("loginToken");
 
