@@ -3,19 +3,11 @@
   "builds": [
     {
       "src": "package.json",
-      "use": "pnpm",
+      "use": "@vercel/static-build",
       "config": {
-        "zeroConfig": true
+        "distDir": "dist"
       }
     }
   ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/index.html",
-      "headers": {
-        "Cache-Control": "public, max-age=0, must-revalidate"
-      }
-    }
-  ]
+  "routes": [{ "src": "/(.*)", "dest": "/index.html" }]
 }
