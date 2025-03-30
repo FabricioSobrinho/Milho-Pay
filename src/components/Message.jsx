@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 
 // import styles
-import styles from "../Styles/Message.module.css";
+import styles from "../styles/Message.module.css";
 
 function Message({ content, messageType }) {
   const time = 3000;
