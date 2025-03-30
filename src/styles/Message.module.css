@@ -4,8 +4,13 @@
     padding: 1%;
     text-align: center;
     border-radius: 1rem;
+    padding: 2%;
 }
 
 .error {
     background: #ca2929cb;
+}
+.success {
+    background: #6bc46b;
+    color: #f0f8ff;
 }
