@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useBaseUrl } from "../hooks/useBaseUrl";
 import Cookies from "js-cookie";
 
@@ -17,6 +17,7 @@ function LoginPage() {
     name: "",
     password: "",
   });
+  const location = useLocation();
 
   const [error, setError] = useState(null);
 
@@ -52,8 +53,15 @@ function LoginPage() {
     } catch (e) {
       console.log(e);
       setLoading(false);
+      setError("Ocorreu um erro ao realizar login");
     }
   };
+
+  useEffect(() => {
+    setInterval(() => {
+      navigate({ state: { message: null } });
+    }, 3000);
+  }, []);
 
   return (
     <>
@@ -64,6 +72,12 @@ function LoginPage() {
           <div className={styles.mainLoginPage}>
             <h1>Bem vindo de volta!</h1>
             {error && <Message content={error} messageType={"error"} />}
+            {location.state && (
+              <Message
+                content={location.state.message}
+                messageType={"success"}
+              />
+            )}
             <div className={styles.loginForm}>
               <Input
                 placeholder={"Nome da Barraca"}

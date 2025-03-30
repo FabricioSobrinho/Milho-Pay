@@ -7,8 +7,12 @@ import styles from "../styles/InitialPageStyles.module.css";
 import Button from "../components/forms/Button";
 import Input from "../components/forms/Input";
 
+import Message from "../components/Message";
+
 function InitialPage() {
   const navigate = useNavigate();
+
+  const [error, setError] = useState(null);
 
   const { baseUrl } = useBaseUrl();
   const [data, setData] = useState({
@@ -18,7 +22,6 @@ function InitialPage() {
   });
 
   const handleData = (e) => {
-    console.log(data);
     setData({ ...data, [e.target.name]: e.target.value });
   };
 
@@ -43,7 +46,7 @@ function InitialPage() {
         });
       }
     } catch (e) {
-      console.log(e);
+      setError("Ocorreu um erro ao criar a Barraca");
     }
   };
 
@@ -57,6 +60,7 @@ function InitialPage() {
       <div className={styles.rigthInitialPage}>
         <h1>Novo por aqui?</h1>
         <h3>Crie sua conta!</h3>
+        {error && <Message content={error} messageType={"error"} />}
         <div className={styles.form}>
           <Input
             placeholder={"Nome da barraca"}
