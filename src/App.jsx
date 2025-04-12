@@ -16,20 +16,13 @@ import DrinkCadPage from "./pages/DrinkCadPage";
 import InitialPanel from "./pages/InitialPanel";
 import TentMenu from "./pages/TentMenu";
 
+import RoutesProvider from "./providers/RoutesProvider";
+
 function App() {
   return (
     <>
       <Router>
-        <MainNavigation />
-        <Routes>
-          <Route exact path="/" element={<InitialPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/order" element={<OrderPage />} />
-          <Route path="/menu" element={<MenuCadPage />} />
-          <Route path="/drink" element={<DrinkCadPage />} />
-          <Route path="/tent" element={<InitialPanel />} />
-          <Route path="/tent/:tent" element={<TentMenu />} />
-        </Routes>
+        <RoutesProvider />
       </Router>
     </>
   );
