@@ -16,7 +16,7 @@ import DrinkCadPage from "./pages/DrinkCadPage";
 import InitialPanel from "./pages/InitialPanel";
 import TentMenu from "./pages/TentMenu";
 
-import RoutesProvider from "./providers/RoutesProvider";
+import RoutesProvider from "./routes/RouteProvider";
 
 function App() {
   return (
