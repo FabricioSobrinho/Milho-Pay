@@ -43,6 +43,7 @@ function LoginPage() {
         Cookies.set("loggedTent", response.data.tent.name, { expires: 7 });
         Cookies.set("isLogged", true, { expires: 7 });
         console.log(Cookies.get("loginToken"));
+
         navigate("/tent");
       } else {
         setLoading(false);
@@ -58,10 +59,15 @@ function LoginPage() {
   };
 
   useEffect(() => {
-    setInterval(() => {
-      navigate({ state: { message: null } });
+  if (location.state?.message) {
+    const timeout = setTimeout(() => {
+      navigate(location.pathname, { state: { message: null } });
     }, 3000);
-  }, []);
+
+    return () => clearTimeout(timeout);
+  }
+}, [location, navigate]);
+
 
   return (
     <>
