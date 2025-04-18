@@ -16,15 +16,16 @@ function InitialPanel() {
   const tentName = Cookies.get("loggedTent");
 
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 750); 
-    return () => clearTimeout(timer);
-  }, []);
+    const token = Cookies.get("loginToken");
+    setLoading(false);
+    if (!token) {
+      navigate("/login");
+    }
+  }, [navigate]);
 
-  const navigate = useNavigate();
   return (
     <>
       {loading ? (
@@ -50,6 +51,11 @@ function InitialPanel() {
                   text={"Tela de vendas"}
                   type={"green"}
                   handleClick={() => navigate("/order")}
+                />
+                <Button
+                  text={"Relatórios"}
+                  type={"green"}
+                  handleClick={() => navigate("/report")}
                 />
               </div>
             </>
