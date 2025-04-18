@@ -1,0 +1,13 @@
+.chartContainer {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    width: 100vw;
+}
+.mainReport {
+    margin-top: 5rem;
+    background: #53cc6e
+}
