@@ -16,6 +16,7 @@
 
   width: 58vw;
   background-color: #039a38;
+  height: 100%;
 }
 
 .leftOrderPage h2 {
@@ -28,6 +29,7 @@
 
     flex-wrap: wrap;
     padding: .7rem;
+    gap: 2rem
 }
 
 .orderResume {
@@ -50,7 +52,7 @@
     justify-content: center;
     align-items: center;
 
-    height: 100vh;
+    height: 100%;
     width: 42vw;
 }
 .ticket {
@@ -72,4 +74,28 @@
 .ticket h4 {
     margin-top: 1rem;
     text-align: center;
+}
+.orderCart {
+    display: flex;
+    gap: .6rem;
+    background: rgb(2, 138, 8);
+    text-align: center;
+
+    justify-content: center;
+    align-items: center;
+
+    margin: .1rem;
+
+    border-radius: .8rem;
+}
+.orderCart p {
+    padding: .5rem;
+    font-size: 19px;
+}
+.remove {
+    height: 100%;
+    background: #970909;
+    padding: .5rem;
+    cursor: pointer;
+    font-size: 22px;
 }

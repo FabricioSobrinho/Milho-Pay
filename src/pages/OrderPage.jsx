@@ -6,6 +6,7 @@ import styles from "../styles/OrderPage.module.css";
 import Button from "../components/forms/Button";
 import Input from "../components/forms/Input";
 import Select from "../components/forms/Select";
+import QuantityPicker from "../components/QuantityPicker";
 
 import OrderItem from "../components/OrderItem";
 import { useEffect, useState } from "react";
@@ -84,7 +85,7 @@ function OrderPage() {
   const addDish = () => {
     setSendDish((prev) => {
       const updated = [...prev, menuDish];
-      updateTotalValue(updated, sendDrink); // Atualiza imediatamente
+      updateTotalValue(updated, sendDrink);
       return updated;
     });
   };
@@ -92,7 +93,7 @@ function OrderPage() {
   const addDrink = () => {
     setSendDrink((prev) => {
       const updated = [...prev, menuDrink];
-      updateTotalValue(sendDish, updated); // Atualiza imediatamente
+      updateTotalValue(sendDish, updated);
       return updated;
     });
   };
@@ -200,11 +201,14 @@ function OrderPage() {
                 handleSelect={handleDishMenu}
                 name={"dishId"}
               />
-              <Input
-                placeholder={"Selecione a quantidade"}
-                name={"quantity"}
-                handleChange={handleDishMenu}
+
+              <QuantityPicker
+                value={menuDish.quantity}
+                onChange={(value) =>
+                  setMenuDish({ ...menuDish, quantity: value })
+                }
               />
+
               <Button text={"Adicionar"} type={"login"} handleClick={addDish} />
 
               <Select
@@ -213,12 +217,13 @@ function OrderPage() {
                 handleSelect={handleDrinkMenu}
                 name={"drinkId"}
               />
-              <Input
-                placeholder={"Selecione a quantidade"}
-                name={"quantity"}
-                handleChange={handleDrinkMenu}
-                type={"number"}
+              <QuantityPicker
+                value={menuDrink.quantity}
+                onChange={(value) =>
+                  setMenuDrink({ ...menuDrink, quantity: value })
+                }
               />
+
               <Button
                 text={"Adicionar"}
                 type={"login"}
@@ -243,17 +248,20 @@ function OrderPage() {
           {dishs
             .filter((item) => sendDish.some((dish) => dish.dishId === item.id))
             .map((filteredDish) => (
-              <div
-                key={filteredDish.id}
-                onClick={() => {
-                  const updatedDishes = sendDish.filter(
-                    (dish) => dish.dishId !== filteredDish.id
-                  );
-                  setSendDish(updatedDishes);
-                  updateTotalValue(updatedDishes, sendDrink);
-                }}
-              >
-                {filteredDish.name}
+              <div className={styles.orderCart} key={filteredDish.id}>
+                <p>{filteredDish.name}</p>
+                <div
+                  className={styles.remove}
+                  onClick={() => {
+                    const updatedDishes = sendDish.filter(
+                      (dish) => dish.dishId !== filteredDish.id
+                    );
+                    setSendDish(updatedDishes);
+                    updateTotalValue(updatedDishes, sendDrink);
+                  }}
+                >
+                  X
+                </div>
               </div>
             ))}
           {drinks
@@ -261,17 +269,20 @@ function OrderPage() {
               sendDrink.some((dish) => dish.drinkId === item.id)
             )
             .map((filteredDrink) => (
-              <div
-                key={filteredDrink.id}
-                onClick={() => {
-                  const updatedDrinks = sendDrink.filter(
-                    (drink) => drink.drinkId !== filteredDrink.id
-                  );
-                  setSendDrink(updatedDrinks);
-                  updateTotalValue(sendDish, updatedDrinks);
-                }}
-              >
-                {filteredDrink.name}
+              <div className={styles.orderCart} key={filteredDrink.id}>
+                <p>{filteredDrink.name}</p>
+                <div
+                  className={styles.remove}
+                  onClick={() => {
+                    const updatedDrinks = sendDrink.filter(
+                      (drink) => drink.drinkId !== filteredDrink.id
+                    );
+                    setSendDrink(updatedDrinks);
+                    updateTotalValue(sendDish, updatedDrinks);
+                  }}
+                >
+                  X
+                </div>
               </div>
             ))}
         </div>
