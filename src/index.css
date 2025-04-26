@@ -12,12 +12,12 @@ body {
   background-image: url("./assets/images/background.jpg");
   background-repeat: no-repeat;
   background-position: center;
-  background-size: cover;
   height: 100vh;
   min-width: 100vw;
   width: 100%;
   overflow-x: hidden;
   display: flex;
+  background-repeat: repeat;
 }
 
 ::-webkit-scrollbar {

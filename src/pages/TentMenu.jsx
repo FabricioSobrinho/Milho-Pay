@@ -16,9 +16,17 @@ function TentMenu() {
       if (Array.isArray(response.data)) {
         setItems(response.data);
       } else if (typeof response.data === "object" && response.data !== null) {
+        const dishes = response.data.dishs || [];
+        const drinks = response.data.drinks || [];
         const combinedItems = [
-          ...(response.data.dishs || []),
-          ...(response.data.drinks || []),
+          ...dishes.map(item => ({
+            ...item,
+            dish: true
+          })),
+          ...drinks.map(item => ({
+            ...item,
+            drink: true
+          }))
         ];
         setItems(combinedItems);
       } else {
@@ -30,7 +38,6 @@ function TentMenu() {
   };
 
   useEffect(() => {
-    console.log(tent);
     getMenu();
   }, [tent]);
 

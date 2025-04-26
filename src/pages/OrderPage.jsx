@@ -294,6 +294,9 @@ function OrderPage() {
           {ticket && <OrderItem order={ticket} />}
 
           <p>Valor total: {toFixed(totalValue)} R$</p>
+          <Button text={"Zerar Ordem"} type={"default"} handleClick={() => {
+            window.location.reload();
+            }}/>
         </div>
       </div>
     </div>
