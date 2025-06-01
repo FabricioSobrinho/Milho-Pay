@@ -1,0 +1,39 @@
+.container {
+  width: 100vw;
+  padding: 2rem;
+  margin-top: 4rem;
+  display: flex;
+  flex-direction: column;
+
+  color: #f0f8ff;
+  align-items: center;
+}
+
+.section {
+  margin-bottom: 2rem;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.editableItem {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #ccc;
+  padding: 1rem;
+  border-radius: 8px;
+  width: 250px;
+
+  background-color: #025025;
+}
+
+.editableItem input {
+  display: flex;
+  justify-content: center;
+  width: 90%;
+}
+.delete input {
+    background: red;
+}
