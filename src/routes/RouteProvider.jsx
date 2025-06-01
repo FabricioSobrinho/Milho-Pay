@@ -12,6 +12,7 @@ import DrinkCadPage from "../pages/DrinkCadPage";
 import InitialPanel from "../pages/InitialPanel";
 import TentMenu from "../pages/TentMenu";
 import ReportPage from "../pages/ReportPage";
+import EditMenuPage from "../pages/EditMenuPage";
 
 export default function RoutesProvider() {
   const location = useLocation();
@@ -30,6 +31,7 @@ export default function RoutesProvider() {
         <Route path="/menu" element={<MenuCadPage />} />
         <Route path="/drink" element={<DrinkCadPage />} />
         <Route path="/report" element={<ReportPage />} />
+        <Route path="/edit" element={<EditMenuPage />} />
         <Route path="/tent" element={<InitialPanel />} />
         <Route path="/tent/:tent" element={<TentMenu />} />
       </Routes>

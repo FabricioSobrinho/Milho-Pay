@@ -126,9 +126,7 @@ function ReportPage() {
 
   return (
     <div className={styles.mainReport}>
-      <h2>Relatórios</h2>
       {renderLineChart(allData, "Todas as Vendas")}
-      {renderLineChart(todayData, "Vendas de Hoje")}
       {selectedItemId &&
         renderLineChart(filteredData, "Vendas por Item Selecionado")}
       {console.log(allData[0])}

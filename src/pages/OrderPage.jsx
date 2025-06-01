@@ -4,7 +4,6 @@ import { useBaseUrl } from "../hooks/useBaseUrl";
 import styles from "../styles/OrderPage.module.css";
 
 import Button from "../components/forms/Button";
-import Input from "../components/forms/Input";
 import Select from "../components/forms/Select";
 import QuantityPicker from "../components/QuantityPicker";
 
@@ -59,6 +58,7 @@ function OrderPage() {
     try {
       const response = await axios.get(`${baseUrl}/dishs`, authToken);
 
+      // eslint-disable-next-line no-unused-vars
       setDishs((prev) => [...response.data]);
     } catch (e) {
       console.log(e);
@@ -77,6 +77,7 @@ function OrderPage() {
     try {
       const response = await axios.get(`${baseUrl}/drinks`, authToken);
 
+      // eslint-disable-next-line no-unused-vars
       setDrinks((prev) => [...response.data]);
     } catch (e) {
       console.log(e);
@@ -168,7 +169,7 @@ function OrderPage() {
         drinks: sendDrink,
       };
 
-      const response = await axios.post(
+      await axios.post(
         `${baseUrl}/sells`,
         sellData,
         authToken

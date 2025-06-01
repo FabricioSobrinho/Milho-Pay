@@ -4,11 +4,8 @@ import { useNavigate } from "react-router-dom";
 import styles from "../styles/InitialPanel.module.css";
 
 import Button from "../components/forms/Button";
-import axios from "axios";
 
-import { useBaseUrl } from "../hooks/useBaseUrl";
 import { useEffect, useState } from "react";
-import loadingImage from "../assets/images/loading.svg";
 import Loader from "../components/Loader";
 
 function InitialPanel() {
@@ -46,6 +43,11 @@ function InitialPanel() {
                   text={"Cadastrar bebidas"}
                   type={"green"}
                   handleClick={() => navigate("/drink")}
+                />
+                <Button
+                  text={"Edição de cardápio"}
+                  type={"green"}
+                  handleClick={() => navigate("/edit")}
                 />
                 <Button
                   text={"Tela de vendas"}
