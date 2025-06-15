@@ -10,6 +10,8 @@ import QuantityPicker from "../components/QuantityPicker";
 import OrderItem from "../components/OrderItem";
 import { useEffect, useState } from "react";
 
+import Message from "../components/Message";
+
 function OrderPage() {
   const { baseUrl, authToken } = useBaseUrl();
   const [paymentMethodId, setPaymentMethodId] = useState(0);
@@ -26,6 +28,9 @@ function OrderPage() {
 
   const [sendDish, setSendDish] = useState([]);
   const [sendDrink, setSendDrink] = useState([]);
+
+  const [success, setSuccess] = useState();
+  const [error, setError] = useState();
 
   const options = [
     {
@@ -169,16 +174,29 @@ function OrderPage() {
         drinks: sendDrink,
       };
 
-      await axios.post(
-        `${baseUrl}/sells`,
-        sellData,
-        authToken
-      );
+      if (sellData.dishes.length == 0 && sellData.drinks.length == 0) {
+        setError("Insira ao menos um item no pedido");
+        setInterval(() => {
+          setError(null);
+        }, 2000);
+      } else if (sellData.paymentMethodId == 0) {
+        setError("Insira o método de pagamento");
 
-      const tick = genTicket(sellData);
-      console.log(tick);
+        setInterval(() => {
+          setError(null);
+        }, 2000);
+      } else {
+        await axios.post(`${baseUrl}/sells`, sellData, authToken);
+        const tick = genTicket(sellData);
 
-      setTicket(tick);
+        setSuccess("Ordem gerada com sucesso");
+
+        setInterval(() => {
+          setSuccess(null);
+        }, 2000);
+
+        setTicket(tick);
+      }
     } catch (e) {
       console.log(e);
     }
@@ -293,11 +311,24 @@ function OrderPage() {
           <h4>Ticket</h4>
 
           {ticket && <OrderItem order={ticket} />}
+          {success && <Message content={success} messageType={"success"} />}
+          {error && <Message content={error} messageType={"error"} />}
 
           <p>Valor total: {toFixed(totalValue)} R$</p>
-          <Button text={"Zerar Ordem"} type={"default"} handleClick={() => {
-            window.location.reload();
-            }}/>
+          <Button
+            text={"Zerar Ordem"}
+            type={"default"}
+            handleClick={() => {
+              window.location.reload();
+            }}
+          />
+          <Button
+            text={"Imprimir ordem"}
+            type={"default"}
+            handleClick={() => {
+              window.alert("Enviado para a impressora");
+            }}
+          />
         </div>
       </div>
     </div>
