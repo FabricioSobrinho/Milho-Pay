@@ -127,12 +127,14 @@ function ReportPage() {
   return (
     <div className={styles.mainReport}>
       {renderLineChart(allData, "Todas as Vendas")}
+      <h3>Vendas por Item Selecionado</h3>
       {selectedItemId &&
-        renderLineChart(filteredData, "Vendas por Item Selecionado")}
+        renderLineChart(filteredData)}
       {console.log(allData[0])}
       <div className={styles.filters}>
         <select
           value={selectedItemType}
+          className={styles.select}
           onChange={(e) => {
             setSelectedItemType(e.target.value);
             setSelectedItemId(null);
@@ -144,6 +146,7 @@ function ReportPage() {
 
         <select
           value={selectedItemId || ""}
+          className={styles.select}
           onChange={(e) =>
             setSelectedItemId(e.target.value ? Number(e.target.value) : null)
           }
